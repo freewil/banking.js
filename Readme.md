@@ -56,7 +56,7 @@ var bankInfo = {
 
 //If second param is omitted JSON will be returned by default
 
-banking.getStatement(bankInfo, 'xml', function(res, err){
+banking.getStatement(bankInfo, 'xml', function(err, res){
     if(err) console.log(err)
     console.log(res);        
 });
@@ -66,7 +66,7 @@ banking.getStatement(bankInfo, 'xml', function(res, err){
 Download file for quickbooks import from your bank and parse
 
 ```javascript
-banking.parseOfxFile('/myfile.ofx', function (res, err) {
+banking.parseOfxFile('/myfile.ofx', function (err, res) {
   if(err) done(err)
   console.log(res); 
 });
@@ -75,7 +75,7 @@ banking.parseOfxFile('/myfile.ofx', function (res, err) {
 ### Parse Ofx String
 
 ```javascript
-banking.parseOfxString('SomeSuperLongOfxString', function (res, err) {
+banking.parseOfxString('SomeSuperLongOfxString', function (err, res) {
   if(err) done(err)
   console.log(res);  
 });

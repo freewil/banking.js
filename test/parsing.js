@@ -20,7 +20,7 @@ describe('Ofx Statements', function(){
       }
 
       //If second param is omitted JSON will be returned by default
-      banking.getStatement(bankInfo, function (res, err) {
+      banking.getStatement(bankInfo, function (err, res) {
         if(err) done(err)
         res.should.be.an.instanceof(Object);
         res.should.have.property('OFX');
@@ -31,24 +31,24 @@ describe('Ofx Statements', function(){
 
   describe('parseOfxFile', function(){
     it('should read the provided file and return JSON', function(done){
-      
-      banking.parseOfxFile(__dirname +'/fixtures/sample.ofx', function (res, err) {
+
+      banking.parseOfxFile(__dirname +'/fixtures/sample.ofx', function (err, res) {
         if(err) done(err)
         res.should.be.an.instanceof(Object);
         res.should.have.property('OFX');
-        done();  
+        done();
       });
     });
   });
 
   describe('parseOfxString', function(){
     it('should read the provided string and return JSON', function(done){
-      
-      banking.parseOfxString(data.ofxString, function (res, err) {
+
+      banking.parseOfxString(data.ofxString, function (err, res) {
         if(err) done(err)
         res.should.be.an.instanceof(Object);
         res.should.have.property('OFX');
-        done();  
+        done();
       });
     });
   });

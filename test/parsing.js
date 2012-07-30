@@ -29,18 +29,6 @@ describe('Ofx Statements', function(){
     });
   });
 
-  describe('parseOfxFile', function(){
-    it('should read the provided file and return JSON', function(done){
-
-      banking.parseOfxFile(__dirname +'/fixtures/sample.ofx', function (err, res) {
-        if(err) done(err)
-        res.should.be.an.instanceof(Object);
-        res.should.have.property('OFX');
-        done();
-      });
-    });
-  });
-
   describe('parseOfxString', function(){
     it('should read the provided string and return JSON', function(done){
 

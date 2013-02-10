@@ -1,4 +1,2 @@
---require should
---ui bdd
---reporter Spec
---globals i
+--ui qunit
+--reporter list

@@ -1,43 +1,37 @@
-var banking = require('../lib/banking')
-  , data = require('./fixtures/data')
-  , mocha = require('mocha');
+var assert = require('assert');
 
-describe('Ofx Statements', function(){
-  describe('getStatement', function() {
-    it('should return valid xml from bank server', function(done){
+var banking = require('../lib/banking');
+var data = require('./fixtures/data');
 
-      var bankInfo = {
-          fid: 321081669
-        , fidorg: 'DI'
-        , url: 'https://ofxdi.diginsite.com/cmr/cmr.ofx'
-        , bankid: 321081669
-        , user: 'someusername'
-        , pass: 'somepassword'
-        , accid: 12345678901
-        , acctype: 'CHECKING'
-        , date_start: 20010125
-        , date_end: 20110125
-      }
+test('valid statement', function(done) {
+  var bankInfo = {
+    fid: 321081669
+    , fidorg: 'DI'
+    , url: 'https://ofxdi.diginsite.com/cmr/cmr.ofx'
+    , bankid: 321081669
+    , user: 'someusername'
+    , pass: 'somepassword'
+    , accid: 12345678901
+    , acctype: 'CHECKING'
+    , date_start: 20010125
+    , date_end: 20110125
+  }
 
-      //If second param is omitted JSON will be returned by default
-      banking.getStatement(bankInfo, function (err, res) {
-        if(err) done(err)
-        res.should.be.an.instanceof(Object);
-        res.should.have.property('OFX');
-        done();
-      });
-    });
+  banking.getStatement(bankInfo, function (err, res) {
+    assert.ifError(err);
+
+    assert.equal(typeof res, 'object');
+    assert.ok(res.OFX);
+    done();
   });
+});
 
-  describe('parseOfxString', function(){
-    it('should read the provided string and return JSON', function(done){
+test('parse Ofx string', function(done) {
 
-      banking.parseOfxString(data.ofxString, function (err, res) {
-        if(err) done(err)
-        res.should.be.an.instanceof(Object);
-        res.should.have.property('OFX');
-        done();
-      });
-    });
+  banking.parseOfxString(data.ofxString, function (err, res) {
+    assert.ifError(err);
+    assert.equal(typeof res, 'object');
+    assert.ok(res.OFX);
+    done();
   });
 });
